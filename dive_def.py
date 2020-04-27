@@ -1,3 +1,4 @@
+from math import *
 
 class Single_dive:
     def __init__(self,profondeur=20,duree=40):
@@ -50,7 +51,7 @@ class Single_dive:
 
             temps_remonte_fond=distance_remonte/15
 
-            temps_plongee_total=round(temps_plongee_total+temps_remonte_fond+tps_remonte_palier)
+            temps_plongee_total=ceil(temps_plongee_total+temps_remonte_fond+tps_remonte_palier)
 
 
 
@@ -68,7 +69,6 @@ class Single_dive:
         duree_table_int=int(duree_table)
 
         print('loop table')
-        #while ((profondeur<profondeur_table_int) or (duree_fond<duree_table_int ) ) :
         while ((profondeur>profondeur_table_int) or (duree_fond>duree_table_int ) ) :
             table_MN90_line=table_MN90.readline()
             if (table_MN90_line == None ):
@@ -104,19 +104,7 @@ class Profile_dive:
         self.duree_totale=0
         self.azote_residuel=81
 
-    # def MAJ_CallBack(self,fenetre):
-    #     self.plongee_1.nom="Matin"
-    #     self.plongee_1.profondeur=int(fenetre.profondeur_1.get())
-    #     self.plongee_1.duree=int(fenetre.duree_1.get())
-    #
-    #     self.plongee_2.nom="Après Midi"
-    #     self.plongee_2.profondeur=int(fenetre.profondeur_2.get())
-    #     self.plongee_2.duree=int(fenetre.duree_2.get())
-    #
-    #     self.intervalle=int(fenetre.intervalle.get())
-    #
-    #     self.plongee_1.calcul_palier()
-    #     self.plongee_2.calcul_palier()
+
 
     def calcul_azote_residuel(self):
         groupe=self.plongee_1.groupe[1]
@@ -152,7 +140,7 @@ class Profile_dive:
             if (str(AZote_tab[0])== str(groupe) ) :
                 print('Azote table',AZote_tab)
                 for index in range(0,25):
-                    if table_duree[index]<intervalle:
+                    if table_duree[index]<=intervalle:
                         azote_residuel=int(AZote_tab[index+1])
 
         Azote_residuel_file.close()

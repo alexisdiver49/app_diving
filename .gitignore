@@ -1,2 +1,4 @@
 #ignore regpertoire build
 build/
+!build/app_diving.zip
+__pycache__/

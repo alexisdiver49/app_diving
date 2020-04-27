@@ -12,7 +12,7 @@ class Dive_drawing:
         self.intervalle=120
 
         self.fenetre = Tk()
-
+        self.fenetre.title("Calcul de palier selon tables MN90-FFESSM")
         self.journee_plongee=dive_def.Profile_dive()
 
 
@@ -415,7 +415,7 @@ class Dive_drawing:
             text2display="Plongee Successive"
             txt = zone_texte.create_text(10, offset, text=text2display, font="Arial 8", fill="blue",anchor='sw')
             offset=offset+20
-            text2display="Azote Residuel :%s "% self.journee_plongee.azote_residuel
+            text2display="Azote Residuel :%s "% (str(self.journee_plongee.azote_residuel/100))
             txt = zone_texte.create_text(10, offset, text=text2display, font="Arial 8", fill="blue",anchor='sw')
             offset=offset+20
             text2display="Majoration Plongee 2 :%s min"% self.journee_plongee.plongee_2.majoration
@@ -434,11 +434,7 @@ class Dive_drawing:
 
 
         self.journee_plongee.plongee_1.nom="Matin"
-        # self.plongee_1.profondeur=main_app.profondeur_1
-        # self.plongee_1.duree=main_app.duree_1
 
-
-        #plongee1.calc_duree_plongee()
         self.journee_plongee.plongee_1.calcul_palier()
         print('Temps de la plongée 1 ' ,self.journee_plongee.plongee_1.duree_totale ,'min')
         print('Profondeur de la plongée 1 ' ,self.journee_plongee.plongee_1.profondeur ,'m')
@@ -450,11 +446,6 @@ class Dive_drawing:
         #######################################"
         #Plongée 2
         self.journee_plongee.plongee_2.nom="Après Midi"
-        # self.plongee_2.profondeur=main_app.profondeur_2
-        # self.plongee_2.duree=main_app.duree_2
-        #plongee2.palier_9m=1
-        #plongee2.palier_6m=9
-        #plongee2.palier_3m=15
 
 
 
@@ -485,10 +476,6 @@ class Dive_drawing:
         temps_surface=self.journee_plongee.intervalle
         #######################################"
 
-        # self.journee_plongee.plongee_1=self.plongee_1
-        # self.journee_plongee.plongee_2=self.plongee_2
-        # self.journee_plongee.intervalle=self.temps_surface
-
 
         duree_avant_plongee=5
         duree_totale=duree_avant_plongee*2+self.journee_plongee.intervalle
@@ -496,9 +483,6 @@ class Dive_drawing:
         duree_totale=duree_totale+self.journee_plongee.plongee_2.duree_totale
 
 
-
-        #self.create_canvas()
-        #self.create_display_result()
         self.reset_display_result()
         self.draw_surface(5,duree_totale)
         self.display_dive(self.journee_plongee.plongee_1,profondeur_max,duree_totale)
